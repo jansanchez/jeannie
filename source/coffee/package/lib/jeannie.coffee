@@ -22,20 +22,18 @@ Jeannie = (opts) ->
 
 	@data = {}
 	@settings = opts or {}
+	@output = @safeLoad()
 	@transform()
 
 	return @
 
-
-Jeannie::load = ()->
+Jeannie::safeLoad = ()->
 	self = @
-	yaml.safeLoad(@settings.content)
-	return
+	return yaml.safeLoad(@settings.content)
 
 Jeannie::transform = ()->
 	self = @
-	console.log 'ejecutando transform'
-	@output = @settings.content
+	#@output = @settings.content
 	console.log @output
 	return
 

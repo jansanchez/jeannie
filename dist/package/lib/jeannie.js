@@ -20,21 +20,20 @@ yaml = require('js-yaml');
 Jeannie = function(opts) {
   this.data = {};
   this.settings = opts || {};
+  this.output = this.safeLoad();
   this.transform();
   return this;
 };
 
-Jeannie.prototype.load = function() {
+Jeannie.prototype.safeLoad = function() {
   var self;
   self = this;
-  yaml.safeLoad(this.settings.content);
+  return yaml.safeLoad(this.settings.content);
 };
 
 Jeannie.prototype.transform = function() {
   var self;
   self = this;
-  console.log('ejecutando transform');
-  this.output = this.settings.content;
   console.log(this.output);
 };
 
