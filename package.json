@@ -37,5 +37,8 @@
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.0.0",
     "should": "^7.1.1"
+  },
+  "dependencies": {
+    "js-yaml": "^3.4.3"
   }
 }
