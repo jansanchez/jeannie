@@ -1,0 +1,21 @@
+interface: MZone
+imports: 
+- Foundation/Foundation.h
+properties:
+- SSID: '(nonatomic, strong) NSString *'
+- hotSpotName: '(nonatomic, strong) NSString *'
+- macAddress: '(nonatomic, strong) NSString *'
+- city: '(nonatomic, strong) NSString *'
+- province: '(nonatomic, strong) NSString *'
+- zip: '(nonatomic, strong) NSString *'
+- countryPrefix: '(nonatomic, strong) NSString *'
+- wisprLocationName: '(nonatomic, strong) NSString *'
+- wisprLocationID: '(nonatomic, strong) NSString *'
+- latitude: '(nonatomic, strong) NSString *'
+- longitude: '(nonatomic, strong) NSString *'
+- hotSpotCategory: '(nonatomic, strong) NSString *'
+- urlWispr: '(nonatomic, strong) NSString *'
+- mainHotSpot: '(nonatomic, strong) NSString *'
+- zoneProfile: '(nonatomic, strong) NSString *'
+- checkInternet: '(nonatomic, strong) NSString *'
+- landingPage: '(nonatomic, strong) NSString *'

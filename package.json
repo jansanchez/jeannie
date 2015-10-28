@@ -2,7 +2,7 @@
   "name": "jeannie",
   "version": "1.0.0",
   "description": "Jeannie Project",
-  "main": "index.js",
+  "main": "dist/package/index.js",
   "scripts": {
     "start": "gulp",
     "test": "mocha",
