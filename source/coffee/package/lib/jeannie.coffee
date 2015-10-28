@@ -8,7 +8,7 @@ Jeannie
 # Module dependencies.
 ###
 
-#util = require('util')
+yaml = require('js-yaml')
 #through = require('through2')
 #Buffer = require('buffer').Buffer
 #extend = util._extend
@@ -26,6 +26,12 @@ Jeannie = (opts) ->
 
 	return @
 
+
+Jeannie::load = ()->
+	self = @
+	yaml.safeLoad(@settings.content)
+	return
+
 Jeannie::transform = ()->
 	self = @
 	console.log 'ejecutando transform'
@@ -34,7 +40,8 @@ Jeannie::transform = ()->
 	return
 
 ###
-# Expose library.
+# Expose library
 ###
 
 module.exports = Jeannie
+

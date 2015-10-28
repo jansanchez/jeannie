@@ -8,17 +8,26 @@ Jeannie
 /*
  * Module dependencies.
  */
+var Jeannie, yaml;
+
+yaml = require('js-yaml');
+
 
 /*
  * Library.
  */
-var Jeannie;
 
 Jeannie = function(opts) {
   this.data = {};
   this.settings = opts || {};
   this.transform();
   return this;
+};
+
+Jeannie.prototype.load = function() {
+  var self;
+  self = this;
+  yaml.safeLoad(this.settings.content);
 };
 
 Jeannie.prototype.transform = function() {
@@ -31,7 +40,7 @@ Jeannie.prototype.transform = function() {
 
 
 /*
- * Expose library.
+ * Expose library
  */
 
 module.exports = Jeannie;
