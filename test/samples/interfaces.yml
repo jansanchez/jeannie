@@ -1,6 +1,16 @@
-interface: MZone
-imports: 
-- Foundation/Foundation.h
+project:
+    name: Smile
+created:
+    name: Jan Sanchez
+    date: 27/12/2014
+copyright:
+    name: Frontend Labs
+    year: 2015
+interface:
+    name: MZone
+    type: NSObject
+imports:
+- import: Foundation/Foundation.h
 properties:
 - SSID: '(nonatomic, strong) NSString *'
 - hotSpotName: '(nonatomic, strong) NSString *'
