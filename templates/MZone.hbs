@@ -1,0 +1,32 @@
+//
+//  {{interface.name}}.h
+{{#if project}}
+//  {{project.name}}
+{{/if}}
+//
+{{#if created}}
+//  Created by {{created.name}} on {{created.date}}.
+{{/if}}
+{{#if copyright}}
+//  Copyright © {{copyright.year}} {{copyright.name}}. All rights reserved.
+{{/if}}
+//
+
+{{#if imports}}
+{{#each imports}}
+#import <{{import}}>
+{{/each}}
+{{/if}}
+
+@interface {{interface.name}} : {{interface.type}}
+
+{{#if properties}}
+{{#each properties}}
+{{#each this}}
+@property {{this}}{{@key}};
+{{/each}}
+{{/each}}
+{{/if}}
+
+
+@end
