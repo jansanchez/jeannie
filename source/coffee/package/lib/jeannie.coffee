@@ -9,7 +9,7 @@ Jeannie
 ###
 
 yaml = require('js-yaml')
-#through = require('through2')
+hbs = require('handlebars')
 #Buffer = require('buffer').Buffer
 #extend = util._extend
 #unescapeHtml = require('unescape-html')
