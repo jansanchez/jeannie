@@ -10,6 +10,10 @@ Jeannie
 
 yaml = require('js-yaml')
 hbs = require('handlebars')
+path = require('path')
+fs = require('fs')
+
+
 #Buffer = require('buffer').Buffer
 #extend = util._extend
 #unescapeHtml = require('unescape-html')
@@ -23,6 +27,7 @@ Jeannie = (opts) ->
 	@data = {}
 	@settings = opts or {}
 	@output = @safeLoad()
+	@result = ''
 	@transform()
 
 	return @
@@ -33,8 +38,11 @@ Jeannie::safeLoad = ()->
 
 Jeannie::transform = ()->
 	self = @
-	#@output = @settings.content
-	console.log @output
+	# console.log @output
+	pathTemplate = path.join(__dirname + '../../../../templates/interface.hbs')
+	source = fs.readFileSync(pathTemplate).toString()
+	template = hbs.compile(source)
+	@result = template(@output)
 	return
 
 ###

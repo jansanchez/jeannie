@@ -8,9 +8,15 @@ Jeannie
 /*
  * Module dependencies.
  */
-var Jeannie, yaml;
+var Jeannie, fs, hbs, path, yaml;
 
 yaml = require('js-yaml');
+
+hbs = require('handlebars');
+
+path = require('path');
+
+fs = require('fs');
 
 
 /*
@@ -21,6 +27,7 @@ Jeannie = function(opts) {
   this.data = {};
   this.settings = opts || {};
   this.output = this.safeLoad();
+  this.result = '';
   this.transform();
   return this;
 };
@@ -32,9 +39,12 @@ Jeannie.prototype.safeLoad = function() {
 };
 
 Jeannie.prototype.transform = function() {
-  var self;
+  var pathTemplate, self, source, template;
   self = this;
-  console.log(this.output);
+  pathTemplate = path.join(__dirname + '../../../../templates/interface.hbs');
+  source = fs.readFileSync(pathTemplate).toString();
+  template = hbs.compile(source);
+  this.result = template(this.output);
 };
 
 

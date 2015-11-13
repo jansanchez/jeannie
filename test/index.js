@@ -5,5 +5,6 @@ fs.readFile('samples/interfaces.yml', 'utf8', function (err, data) {
 	var newFile = jeannie({
 		content: data
 	});
-	//console.log(newFile.output);
+	// console.log(newFile.output);
+	console.log(newFile.result);
 });
