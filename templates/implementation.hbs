@@ -1,5 +1,5 @@
 //
-//  {{interface.name}}.h
+//  {{interface.name}}.m
 {{#if project}}
 //  {{project.name}}
 {{/if}}
@@ -12,21 +12,20 @@
 {{/if}}
 //
 
-{{#if imports}}
-{{#each imports}}
-#import <{{import}}>
-{{/each}}
-{{/if}}
+#import "{{interface.name}}.m"
 
-@interface {{interface.name}} : {{interface.type}}
+@implementation {{interface.name}}
+
+
 
 {{#if properties}}
 {{#each properties}}
-{{#each this}}
-@property {{this}}{{@key}};
+{{#each this as |val|}}
+{{#list val}}{{@key}}{{/list}}
 {{/each}}
 {{/each}}
 {{/if}}
 
 
 @end
+
