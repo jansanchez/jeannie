@@ -6,7 +6,7 @@ fs.readFile('samples/interfaces.yml', 'utf8', function (err, data) {
 		debug: true,
 		content: data,
 		path: {
-			interface: 'samples/x.hbs'
+			header: 'samples/header.hbs'
 		}
 	});
 	// console.log(newFile.json);

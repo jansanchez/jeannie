@@ -29,11 +29,11 @@ Jeannie = function(opts) {
   this.defaults = {};
   this.settings = {};
   this.json = {};
-  this.output = '';
+  this.output = [];
   this.setDefaults();
   this.toExtend(opts);
   this.getJson();
-  this.toProcess();
+  this.toProcess('header');
   return this;
 };
 
@@ -41,7 +41,8 @@ Jeannie.prototype.setDefaults = function() {
   this.defaults = {
     debug: false,
     path: {
-      "interface": __dirname + '../../../../templates/interface.hbs'
+      header: __dirname + '../../../../templates/header.hbs',
+      implementation: __dirname + '../../../../templates/implementation.hbs'
     }
   };
 };
@@ -60,13 +61,15 @@ Jeannie.prototype.getJson = function() {
   }
 };
 
-Jeannie.prototype.toProcess = function() {
+Jeannie.prototype.toProcess = function(type) {
   var pathTemplate, source, template;
-  pathTemplate = path.join(this.settings.path["interface"]);
+  pathTemplate = path.join(this.settings.path[type]);
   source = fs.readFileSync(pathTemplate).toString();
   template = hbs.compile(source);
-  this.output = template(this.json);
-  console.log(this.output);
+  this.output[type] = template(this.json);
+  if (this.settings.debug) {
+    console.log(this.output);
+  }
 };
 
 

@@ -22,18 +22,19 @@ Jeannie = (opts) ->
 	@defaults = {}
 	@settings = {}
 	@json = {}
-	@output = ''
+	@output = []
 	@setDefaults()
 	@toExtend(opts)
 	@getJson()
-	@toProcess()
+	@toProcess('header')
 	return @
 
 Jeannie::setDefaults = ()->
 	@defaults = {
 		debug: false,
 		path: {
-			interface: __dirname + '../../../../templates/interface.hbs'
+			header : __dirname + '../../../../templates/header.hbs'
+			implementation: __dirname + '../../../../templates/implementation.hbs'
 		}
 	}
 	return
@@ -50,12 +51,13 @@ Jeannie::getJson = ()->
 		console.log(@json)
 	return
 
-Jeannie::toProcess= ()->
-	pathTemplate = path.join(@settings.path.interface)
+Jeannie::toProcess= (type)->
+	pathTemplate = path.join(@settings.path[type])
 	source = fs.readFileSync(pathTemplate).toString()
 	template = hbs.compile(source)
-	@output = template(@json)
-	console.log(@output)
+	@output[type] = (template(@json))
+	if	@settings.debug
+		console.log(@output)
 	return
 
 
