@@ -3,8 +3,12 @@ var jeannie = require('../dist/package/index'),
 
 fs.readFile('samples/interfaces.yml', 'utf8', function (err, data) {
 	var newFile = jeannie({
-		content: data
+		debug: true,
+		content: data,
+		path: {
+			interface: 'samples/x.hbs'
+		}
 	});
+	// console.log(newFile.json);
 	// console.log(newFile.output);
-	console.log(newFile.result);
 });

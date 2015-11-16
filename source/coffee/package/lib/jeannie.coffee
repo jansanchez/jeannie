@@ -12,42 +12,55 @@ yaml = require('js-yaml')
 hbs = require('handlebars')
 path = require('path')
 fs = require('fs')
-
-
-#Buffer = require('buffer').Buffer
-#extend = util._extend
-#unescapeHtml = require('unescape-html')
+extend  = require('util')._extend
 
 ###
 # Library.
 ###
 
 Jeannie = (opts) ->
-
-	@data = {}
-	@settings = opts or {}
-	@output = @safeLoad()
-	@result = ''
-	@transform()
-
+	@defaults = {}
+	@settings = {}
+	@json = {}
+	@output = ''
+	@setDefaults()
+	@toExtend(opts)
+	@getJson()
+	@toProcess()
 	return @
 
-Jeannie::safeLoad = ()->
-	self = @
-	return yaml.safeLoad(@settings.content)
+Jeannie::setDefaults = ()->
+	@defaults = {
+		debug: false,
+		path: {
+			interface: __dirname + '../../../../templates/interface.hbs'
+		}
+	}
+	return
 
-Jeannie::transform = ()->
-	self = @
-	# console.log @output
-	pathTemplate = path.join(__dirname + '../../../../templates/interface.hbs')
+Jeannie::toExtend = (opts)->
+	@settings = extend(@defaults, opts)
+	if @settings.debug
+		console.log(@settings)
+	return
+
+Jeannie::getJson = ()->
+	@json = yaml.safeLoad(@settings.content)
+	if @settings.debug
+		console.log(@json)
+	return
+
+Jeannie::toProcess= ()->
+	pathTemplate = path.join(@settings.path.interface)
 	source = fs.readFileSync(pathTemplate).toString()
 	template = hbs.compile(source)
-	@result = template(@output)
+	@output = template(@json)
+	console.log(@output)
 	return
+
 
 ###
 # Expose library
 ###
 
 module.exports = Jeannie
-
