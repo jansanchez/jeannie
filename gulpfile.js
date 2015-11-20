@@ -8,7 +8,8 @@
 var gulp = require('gulp'),
 	coffee = require('gulp-coffee'),
 	complexity = require('gulp-complexity'),
-	chalk = require('chalk');
+	chalk = require('chalk'),
+	exec = require('child_process').exec;
 
 gulp.task('default', function() {
 	console.log('go!');
@@ -39,4 +40,19 @@ gulp.task('complexity', function(){
 	return gulp.src(path.dist + "**/**/*.js")
 	.pipe(complexity({breakOnErrors: false, halstead: [10, 13, 20]}));
 });
+
+gulp.task('watch2', function(){
+	  return gulp.watch(path.dist + "package/lib/*.js", ["exec"]);
+});
+
+
+gulp.task('exec', function(cb){
+	exec('node test/index', function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+});
+
+
 
